@@ -96,5 +96,47 @@ namespace Finance_D_argent.Controllers
             return View(user);
         }
 
+
+        [HttpPost]
+        public IActionResult LockUnlock(string userId)
+        {
+            var objFromDb = _db.ApplicationUser.FirstOrDefault(u => u.Id == userId);
+            if (objFromDb == null)
+            {
+                return NotFound();
+            }
+            if (objFromDb.LockoutEnd !=null && objFromDb.LockoutEnd > DateTime.Now)
+            {
+                //user is lockedout and will remain locked until lockoutend time
+                //clicking on this action will unlock them
+                objFromDb.LockoutEnd= DateTime.Now;
+                TempData[SD.Success] = "User unlocked successfully.";
+            }
+            else
+            {
+                //user is not locked and we want to lock the user
+                objFromDb.LockoutEnd = DateTime.Now.AddYears(1000);
+                TempData[SD.Success] = "User locked successfully.";
+            }
+            _db.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+
+        public IActionResult Delete(string userId)
+        {
+            var objFromDb = _db.ApplicationUser.FirstOrDefault(u => u.Id == userId);
+            if (objFromDb == null)
+            {
+                return NotFound();
+            }
+            _db.ApplicationUser.Remove(objFromDb);
+            _db.SaveChanges();
+            TempData[SD.Success] = "User deleted successfully.";
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
