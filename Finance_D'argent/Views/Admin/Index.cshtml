@@ -6,40 +6,39 @@
 
 <h2 class="text-center" style="margin-left:50px">Admin Dashboard</h2>
 
-<div class="sidebar-container border-dark">
-    <div>
-        <br />
-        <div class="text-center">Quick Actions</div>
-        <br />
-    </div>
-
-    <ul class="sidebar-navigation">
-        <li>
-            <a asp-controller="Admin" asp-action="Index" class="btn btn-info btn-outline-light">Dashboard</a>
-        </li>
-        <li>
-            <a asp-controller="Admin" asp-action="Send" class="btn btn-dark btn-outline-info">Send Message </a>
-        </li>
-        <li>
-            <a asp-controller="UnapprovedUsers" asp-action="Index" class="btn btn-dark btn-outline-info">Pending Approval</a>
-        </li>
-        <li>
-            <a asp-controller="User" asp-action="Index" class="btn btn-dark btn-outline-info">Users List</a>
-        </li>
-        <li>
-            <a asp-controller="Money" asp-action="ChartOfAccounts" class="btn btn-dark btn-outline-info">Chart of Accounts</a>
-        </li>
-        <li>
-            <a asp-controller="Admin" asp-action="Report" class="btn btn-dark btn-outline-info">Reports</a>
-        </li>
-        <li>
-            <a asp-controller="Admin" asp-action="Journalize" class="btn btn-dark btn-outline-info">Journalize</a>
-        </li>
-        <li>
-            <a asp-controller="Admin" asp-action="EventLog" class="btn btn-dark btn-outline-info">Event Log</a>
-        </li>
-    </ul>
+<div class="sidebar-container">
+  <div class="sidebar-logo">
+    Finance D'argent
+  </div>
+  <ul class="sidebar-navigation">
+    <li>
+      <a a asp-controller="Admin" asp-action="Index" class="btn btn-warning btn-outline-light">Dashboard</a>
+    </li>
+    <li>
+      <a a asp-controller="Admin" asp-action="Send" class="btn btn-warning btn-outline-light">Send Message </a>
+    </li>
+    <li>
+      <a asp-controller="UnapprovedUsers" asp-action="Index" class="btn btn-warning btn-outline-light">Pending Approval</a>
+    </li>
+    <li>
+      <a asp-controller="User" asp-action="Index" class="btn btn-warning btn-outline-light">Users List</a>
+    </li>
+    <li>
+      <a asp-controller="Money" asp-action="ChartOfAccounts" class="btn btn-warning btn-outline-light">Chart of Accounts</a>
+    </li>
+    <li>
+      <a asp-controller="Admin" asp-action="Report" class="btn btn-warning btn-outline-light">Reports</a>
+    </li>
+    <li>
+      <a asp-controller="Admin" asp-action="Journalize" class="btn btn-warning btn-outline-light">Journalize</a>
+    </li>
+    </li>
+    <li>
+      <a asp-controller="Admin" asp-action="EventLog" class="btn btn-warning btn-outline-light">Event Log</a>
+    </li>
+  </ul>
 </div>
+
 
 
 <script>

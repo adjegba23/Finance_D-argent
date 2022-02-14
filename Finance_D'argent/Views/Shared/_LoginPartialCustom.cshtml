@@ -7,6 +7,9 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <ul class="navbar-nav">
+            <li>
+                <a asp-controller="Admin" asp-action="Index"><img src="~/frontend/Logo.jpg" alt=”Image” style="width:40px; height:40px;position:absolute; top:10px; left:10px"></a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Hello @UserManager.GetUserName(User)</a>
             </li>

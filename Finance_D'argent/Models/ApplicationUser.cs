@@ -9,6 +9,10 @@ namespace Finance_D_argent.Models
     {
         [Required]
         public string? Name { get; set; }
+        public string? FirstName { get; set; }
+        public string? LastName { get; set; }
+        public string? CustomUsername { get; set; }
+        public bool isApproved { get; set; }
 
         [NotMapped]
         public string? RoleId { get; set; }
@@ -19,5 +23,6 @@ namespace Finance_D_argent.Models
         [NotMapped]
 
         public IEnumerable<SelectListItem>? RoleList { get; set; }
+        
     }
 }
