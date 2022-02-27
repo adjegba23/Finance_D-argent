@@ -15,5 +15,9 @@ namespace Finance_D_argent.Data
         public DbSet<AccountsviewModel> Accounts { get; set; }
 
         public DbSet<ErrorTable> errorTables { get; set; }
+
+        public DbSet<Journal_Acounts> Journal_Acounts { get; set;}
+
+        public DbSet<Journalize> journalizes { get; set; }
     }
 }

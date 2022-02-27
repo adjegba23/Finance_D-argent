@@ -26,12 +26,12 @@ namespace Finance_D_argent.Controllers
         private readonly ApplicationDbContext _db;
 
         //variables used to implement management of the user
-        UserManager<IdentityUser> _userManager;
-        SignInManager<IdentityUser> _signInManager;
+        UserManager<ApplicationUser> _userManager;
+        SignInManager<ApplicationUser> _signInManager;
         RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(ApplicationDbContext db, UserManager<IdentityUser> userManager,
-         SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager,
+        public AdminController(ApplicationDbContext db, UserManager<ApplicationUser> userManager,
+         SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager,
          IConfiguration configuration, IWebHostEnvironment webHostEnvironment, IEmailSender emailsender)
         {
             _db = db;

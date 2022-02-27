@@ -8,12 +8,12 @@ namespace Finance_D_argent.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-         UserManager<IdentityUser> _userManager;
-         SignInManager<IdentityUser> _signInManager;
+         UserManager<ApplicationUser> _userManager;
+         SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager,
-         SignInManager<IdentityUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<ApplicationUser> userManager,
+         SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
         {
             _logger = logger;
             _userManager = userManager;
