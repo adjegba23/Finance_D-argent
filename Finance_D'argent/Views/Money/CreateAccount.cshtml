@@ -1,0 +1,154 @@
+﻿@model Finance_D_argent.Models.AccountsviewModel
+
+<div class="sidebar-container border-dark">
+        <div>
+            <br />
+            <div class="text-center border-info">Quick Actions</div>
+            <br />
+        </div>
+
+        <ul class="sidebar-navigation">
+            <li>
+                <a asp-controller="Admin" asp-action="Index" class="btn btn-dark btn-outline-warning">Dashboard</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="Send" class="btn btn-dark btn-outline-warning">Send Message </a>
+            </li>
+            <li>
+                <a asp-controller="UnapprovedUsers" asp-action="Index" class="btn btn-dark btn-outline-warning">Pending Approval</a>
+            </li>
+            <li>
+                <a asp-controller="User" asp-action="Index" class="btn btn-dark btn-outline-warning">User Management</a>
+            </li>
+            <li>
+                <a asp-controller="Money" asp-action="Accounts" class="btn btn-info btn-outline-warning">Account List</a>
+            </li>
+            <li>
+                <a asp-controller="Admin" asp-action="EventLog" class="btn btn-dark btn-outline-warning">Event Log</a>
+            </li>
+        </ul>
+</div>
+
+<h2 class="text-center">Add Account</h2>
+<br />
+<div id="centerform1">    
+    <hr />
+    <form method="post" asp-action="CreateAccount" asp-controller="Money">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <select asp-for="Category" class="form-control">
+                    <option disabled selected>Select Account Type</option>
+                    <option value="Asset">Asset</option>
+                    <option value="Expenses">Expenses</option>
+                    <option value="Liability">Liability</option>
+                    <option value="Equity">Equity</option>
+                    <option value="Revenue">Revenue</option>
+                </select>
+            </div>
+            <div class="col-lg-6" id="SubCategoryDropDown">
+                <select asp-for="SubCategory" class="form-control">
+                    <option disabled>--Select a Sub-Type--</option>
+                    <option>Current</option>
+                    <option>Long-Term</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="input-group">
+                <div>&nbsp;&nbsp;&nbsp;</div>
+                <label typeof="input-group-text" class="input-group-prepend; " id="AcNum">
+                </label>
+                <div class="col-xs-2" style="width:190px">
+                    <input asp-for="AccountNumber" class="form-control" placeholder="Account Number" aria-describedby="AcNum" />
+                </div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                <div class="col-lg-7">
+                    <input asp-for="AccountName" class="form-control" placeholder="Account Name" />
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <input asp-for="InitialBalance" class="form-control" placeholder="Initial Balance" />
+            </div>
+
+            <div class="col-lg-6">
+                <input asp-for="Order" class="form-control" placeholder="Liquidity Order" />
+            </div>
+        </div>
+        <br />
+        <div class="form-group row">
+            <div class="col-lg-6">
+                <input asp-for="Description" class="form-control" placeholder="Description" />
+            </div>
+
+            <div class="col-lg-6">
+                <input asp-for="Comments" class="form-control" placeholder="Comments" />
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <div class="col-lg-4">
+                <label>Active: </label>
+                @Html.CheckBoxFor(m => m.Active)
+            </div>
+            <div class="col-lg-4">
+                <label>Contra: </label>
+                @Html.CheckBoxFor(m => m.Contra)
+            </div>
+            <div class="col-lg-4">
+                <label>CoA: </label>
+                @Html.CheckBoxFor(m => m.ChartsOfAccounts)
+            </div>
+        </div>
+        <br />
+
+        <div class="text-center">
+            <a asp-action="Accounts" class="btn btn-warning w-25">Back</a>
+            <input type="submit" value="Create Account" class=" btn btn-success fa-align-center" />
+        </div>
+            
+        
+
+        <script>
+            $("#Category").on("change", function () {
+                if (($("#Category option:selected").val() == "Asset") || ($("#Category option:selected").val() == "Liability")) {
+                    document.getElementById('SubCategoryDropDown').style.visibility = "visible";
+                } else {
+                    document.getElementById('SubCategoryDropDown').style.visibility = "hidden";
+                }
+                if ($("#Category option:selected").val() == "Asset") {
+                    document.getElementById('AcNum').textContent = 1;
+                }
+                else if ($("#Category option:selected").val() == "Expenses") {
+                    document.getElementById('AcNum').textContent = 5;
+                }
+                else if ($("#Category option:selected").val() == "Liability") {
+                    document.getElementById('AcNum').textContent = 2;
+                }
+                else if ($("#Category option:selected").val() == "Equity") {
+                    document.getElementById('AcNum').textContent = 3;
+                }
+                else if ($("#Category option:selected").val() == "Revenue") {
+                    document.getElementById('AcNum').textContent = 4;
+                }
+                document.getElementById('AccountNumber').placeholder = "";
+            });
+        </script>
+
+    </form>
+</div>
+<br />
+
+
+
+
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+       

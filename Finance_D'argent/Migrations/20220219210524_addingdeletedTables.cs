@@ -5,10 +5,38 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Finance_D_argent.Migrations
 {
-    public partial class AddIdentityTables : Migration
+    public partial class addingdeletedTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Accounts",
+                columns: table => new
+                {
+                    AccountNumber = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AccountName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalSide = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateCreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InitialBalance = table.Column<double>(type: "float", nullable: true),
+                    Category = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubCategory = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Debit = table.Column<double>(type: "float", nullable: false),
+                    Credit = table.Column<double>(type: "float", nullable: false),
+                    Order = table.Column<int>(type: "int", nullable: false),
+                    Statement = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Active = table.Column<bool>(type: "bit", nullable: false),
+                    Contra = table.Column<bool>(type: "bit", nullable: false),
+                    ChartsOfAccounts = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Accounts", x => x.AccountNumber);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -28,6 +56,12 @@ namespace Finance_D_argent.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CustomUsername = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    isApproved = table.Column<bool>(type: "bit", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -46,6 +80,19 @@ namespace Finance_D_argent.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "errorTables",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Message = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_errorTables", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -197,6 +244,9 @@ namespace Finance_D_argent.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Accounts");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -210,6 +260,9 @@ namespace Finance_D_argent.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "errorTables");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

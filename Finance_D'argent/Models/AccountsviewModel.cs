@@ -8,7 +8,7 @@ namespace Finance_D_argent.Models
     {
         [Required]
         [Display(Name ="Account Name")]
-        public string? AcccountName { get; set; } 
+        public string AccountName { get; set; } 
         public string? NormalSide { get; set; }
 
         [Key]
@@ -19,13 +19,15 @@ namespace Finance_D_argent.Models
 
         public DateTime DateCreatedOn { get; set; }
         
-        public int Username { get; set; }  
+        public string UserName { get; set; }  
 
         [DataType(DataType.Currency)]
         public double? InitialBalance { get; set; }
 
         [Required]
         public string Category { get; set; }
+
+        public string SubCategory { get; set; }
 
         [DataType(DataType.Currency)]
         public double Debit { get; set; }
@@ -42,6 +44,8 @@ namespace Finance_D_argent.Models
         public string Comments { get; set; }
         public bool Active { get; set; }
         public bool Contra { get; set; }
+
+        public bool ChartsOfAccounts { get; set; }
 
     }
 }

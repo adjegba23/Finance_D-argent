@@ -11,5 +11,9 @@ namespace Finance_D_argent.Data
 
         }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<AccountsviewModel> Accounts { get; set; }
+
+        public DbSet<ErrorTable> errorTables { get; set; }
     }
 }
