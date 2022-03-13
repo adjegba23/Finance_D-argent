@@ -39,8 +39,7 @@ namespace Finance_D_argent.Models
         [NotMapped]
         public bool IsApproved { get; set; }
 
-        public string Reason { get; set; }
-
+       
         public bool IsRejected { get; set; }
 
         public string Description { get; set; }
