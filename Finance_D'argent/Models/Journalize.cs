@@ -21,7 +21,7 @@ namespace Finance_D_argent.Models
 
         public virtual List<Journal_Accounts> Journal_Accounts { get; set; } = new List<Journal_Accounts>();
 
-        public string docUrl { get; set; }
+        public string? docUrl { get; set; }
         public string Reason { get; set; }
 
         [NotMapped]
