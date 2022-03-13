@@ -369,6 +369,113 @@ namespace Finance_D_argent.Controllers
             var sortList = _db.Journal_Accounts.ToList();
             return View(sortList);
         }
+
+        [HttpGet]
+
+        public IActionResult AccountLedger(int? id)
+        {
+            var sortList = _db.Journal_Accounts.ToList();
+            var jList = _db.journalizes.ToList();
+
+            foreach (var s in sortList)
+            {
+                foreach (var j in jList)
+                {
+                    if (s.JournalId == j.JournalId && j.IsApproved == true)
+                    {
+                        s.IsApproved = true;
+                        s.Description = j.Description;
+                        s.Type = j.Type;
+                    }
+                }
+            }
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var accountmatch = _db.Accounts.FirstOrDefault(u => u.AccountNumber == id);
+            List<Journal_Accounts> ja = new List<Journal_Accounts>();
+            foreach (var item in sortList)
+            {
+                if (item.IsApproved)
+                {
+                    ja.Add(item);
+                }
+            }
+
+            AccountLedger account_ledger = new AccountLedger
+            {
+                account = accountmatch,
+                Journal_Accounts = ja
+            };
+            return View(account_ledger);
+
+        }
+
+        [HttpPost]
+        public IActionResult AccountLedger(DateTime dateSearch1,
+           DateTime dateSearch2, double LedgerID)
+        {
+            List<Journal_Accounts> approved_results = new List<Journal_Accounts>();
+            var sortList = _db.Journal_Accounts.ToList();
+            var jList = _db.journalizes.ToList();
+            AccountLedger account_ledger = new AccountLedger();
+            var accounts = _db.Accounts.ToList();
+            int counter = 0;
+
+            //selects the account for the ledger
+            foreach (var item in accounts)
+            {
+                if (item.AccountNumber == LedgerID)
+                {
+                    account_ledger.account = item;
+                    break;
+                }
+            }
+            //determines original length of list before filtering
+            foreach (var s in sortList)
+            {
+                foreach (var j in jList)
+                {
+                    if (s.JournalId == j.JournalId && j.IsApproved == true && s.AccountName1 == account_ledger.account.AccountName)
+                    {
+                        counter++;
+                    }
+                    if (s.JournalId == j.JournalId && j.IsApproved == true && s.AccountName2 == account_ledger.account.AccountName)
+                    {
+                        counter++;
+                    }
+                }
+            }
+
+            //returns search results
+            var searchresult = SearchResult(dateSearch1, dateSearch2);
+            foreach (var s in searchresult)
+            {
+                foreach (var j in jList)
+                {
+                    if (s.JournalId == j.JournalId && j.IsApproved == true && s.AccountName1 == account_ledger.account.AccountName)
+                    {
+                        s.Description = j.Description;
+                        s.Type = j.Type;
+                        approved_results.Add(s);
+                    }
+                    if (s.JournalId == j.JournalId && j.IsApproved == true && s.AccountName2 == account_ledger.account.AccountName)
+                    {
+                        s.Description = j.Description;
+                        s.Type = j.Type;
+                        approved_results.Add(s);
+                    }
+                }
+            }
+            account_ledger.Journal_Accounts = approved_results;
+            ViewBag.Search1 = dateSearch1;
+            ViewBag.Search2 = dateSearch2;
+            ViewBag.Counter = counter;
+            return View(account_ledger);
+        }
     }
 }
 
