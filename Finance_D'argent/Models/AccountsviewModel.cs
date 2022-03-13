@@ -35,6 +35,11 @@ namespace Finance_D_argent.Models
         [DataType(DataType.Currency)]
         public double Credit { get; set; }
 
+        public string Balance { get; set; }
+
+        [DataType(DataType.DateTime)]
+        public DateTime CreatedOn { get; set; }
+
         [NotMapped]
         public IEnumerable<SelectListItem> Accounts { get; set; }
 

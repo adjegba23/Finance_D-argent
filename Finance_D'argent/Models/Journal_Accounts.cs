@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Finance_D_argent.Models
 
 {
-    public class Journal_Acounts
+    public class Journal_Accounts
     {
         [Key]
         public int JAId { get; set; }

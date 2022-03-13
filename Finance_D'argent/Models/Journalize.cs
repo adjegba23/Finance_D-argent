@@ -19,9 +19,10 @@ namespace Finance_D_argent.Models
         [NotMapped]
         public IEnumerable<SelectListItem> AccountList { get; set; }
 
-        public virtual List<Journal_Acounts> Journal_Acounts { get; set; } = new List<Journal_Acounts>();
+        public virtual List<Journal_Accounts> Journal_Accounts { get; set; } = new List<Journal_Accounts>();
 
-        public string docUrl { get; set; }  
+        public string docUrl { get; set; }
+        public string Reason { get; set; }
 
         [NotMapped]
         public IFormFile Document { get; set; }
@@ -33,5 +34,6 @@ namespace Finance_D_argent.Models
         public string Type { get; set; }
 
         public bool IsCJE { get; set; }
+        
     }
 }

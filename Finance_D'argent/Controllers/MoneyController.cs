@@ -18,16 +18,19 @@ namespace Finance_D_argent.Controllers
             _userManager = userManager;
             _roleManager = roleManager;
         }
+
         public IActionResult Index()
         {
             return View();
         }
+
 
         [HttpGet]
         public IActionResult CreateAccount()
         {
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -135,10 +138,13 @@ namespace Finance_D_argent.Controllers
             account.DateCreatedOn = DateTime.Now;
             account.InitialBalance = account.InitialBalance;
 
+
             _db.Accounts.Add(account);
             await _db.SaveChangesAsync();
             return RedirectToAction("Accounts", "Money");
         }
+
+
         [HttpGet]
         public IActionResult Accounts()
         {
@@ -146,6 +152,8 @@ namespace Finance_D_argent.Controllers
             return View(sortList);
 
         }
+
+
         [HttpPost]
         public IActionResult Accounts(DateTime dateSearch1,
             DateTime dateSearch2, float balanceSearch1, float balanceSearch2)
@@ -155,6 +163,8 @@ namespace Finance_D_argent.Controllers
             return View(sortList);
 
         }
+
+
         [HttpGet]
         public IActionResult EditAccount(double? id)
         {
@@ -173,8 +183,6 @@ namespace Finance_D_argent.Controllers
 
             return View(objFromDb);
         }
-
-
 
 
         [HttpPost]
@@ -265,6 +273,8 @@ namespace Finance_D_argent.Controllers
             }
             return View(obj);
         }
+
+
         public IEnumerable<AccountsviewModel> SearchResult(DateTime date1, DateTime date2, float balance1, float balance2)
         {
             var list = _db.Accounts.ToList();
@@ -316,12 +326,13 @@ namespace Finance_D_argent.Controllers
             }
             return resultList;
         }
-        public IEnumerable<Journal_Acounts> SearchResult(DateTime date1, DateTime date2)
-        {
-            List<Journal_Acounts> activeList = new List<Journal_Acounts>();
-            List<Journal_Acounts> resultList = new List<Journal_Acounts>();
 
-            var jaList = _db.Journal_Acounts.ToList();
+        public IEnumerable<Journal_Accounts> SearchResult(DateTime date1, DateTime date2)
+        {
+            List<Journal_Accounts> activeList = new List<Journal_Accounts>();
+            List<Journal_Accounts> resultList = new List<Journal_Accounts>();
+
+            var jaList = _db.Journal_Accounts.ToList();
             var jList = _db.journalizes.ToList();
             foreach (var j in jaList)
             {
@@ -343,6 +354,8 @@ namespace Finance_D_argent.Controllers
             }
             return resultList;
         }
+
+
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -350,9 +363,10 @@ namespace Finance_D_argent.Controllers
             return Json(new {data = accountList});
         }
 
+
         public IActionResult JournalIndex()
         {
-            var sortList = _db.Journal_Acounts.ToList();
+            var sortList = _db.Journal_Accounts.ToList();
             return View(sortList);
         }
     }

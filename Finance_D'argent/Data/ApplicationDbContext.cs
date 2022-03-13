@@ -16,7 +16,7 @@ namespace Finance_D_argent.Data
 
         public DbSet<ErrorTable> errorTables { get; set; }
 
-        public DbSet<Journal_Acounts> Journal_Acounts { get; set;}
+        public DbSet<Journal_Accounts> Journal_Accounts { get; set;}
 
         public DbSet<Journalize> journalizes { get; set; }
     }
