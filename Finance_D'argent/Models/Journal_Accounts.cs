@@ -12,7 +12,7 @@ namespace Finance_D_argent.Models
 
         [ForeignKey("AccountsviewModel")]
         public int JournalId { get; set; }  
-        public virtual Journalize Journalize { get; private set; }
+        public virtual Journalize? Journalize { get; private set; }
 
         [DataType(DataType.Currency)]
         public double Debit { get; set; }
@@ -23,9 +23,9 @@ namespace Finance_D_argent.Models
         [DataType(DataType.DateTime)]
         public DateTime CreatedOn { get; set; }
 
-        public string AccountName1 { get; set; }
+        public string? AccountName1 { get; set; }
 
-        public string AccountName2 { get; set; }
+        public string? AccountName2 { get; set; }
 
         [NotMapped]
         public double AccountNumber1 { get; set; }
@@ -34,22 +34,22 @@ namespace Finance_D_argent.Models
         public double AccountNumber2 { get; set; }
 
         [NotMapped]
-        public IEnumerable<SelectListItem> AccountList { get; set; }
+        public IEnumerable<SelectListItem>? AccountList { get; set; }
 
         [NotMapped]
         public bool IsApproved { get; set; }
 
-        public string Reason { get; set; }
+        public string? Reason { get; set; }
        
         public bool IsRejected { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [NotMapped]
-        public string Type { get; set; }
+        public string? Type { get; set; }
 
         [NotMapped]
-        public string SelectedType { get; set; }
+        public string? SelectedType { get; set; }
 
 
 

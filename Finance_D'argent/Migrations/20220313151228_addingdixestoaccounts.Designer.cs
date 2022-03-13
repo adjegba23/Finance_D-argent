@@ -4,6 +4,7 @@ using Finance_D_argent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Finance_D_argent.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220313151228_addingdixestoaccounts")]
+    partial class addingdixestoaccounts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,6 +40,7 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Balance")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Category")
@@ -48,10 +51,14 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Comments")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Contra")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("Credit")
                         .HasColumnType("float");
@@ -63,6 +70,7 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("InitialBalance")
@@ -75,12 +83,15 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Statement")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubCategory")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AccountNumber");
@@ -137,7 +148,7 @@ namespace Finance_D_argent.Migrations
                     b.Property<int>("JournalId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("JournalizeJournalId")
+                    b.Property<int>("JournalizeJournalId")
                         .HasColumnType("int");
 
                     b.Property<string>("Reason")
@@ -162,6 +173,7 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsApproved")
@@ -177,6 +189,7 @@ namespace Finance_D_argent.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Type")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("docUrl")
@@ -418,7 +431,9 @@ namespace Finance_D_argent.Migrations
                 {
                     b.HasOne("Finance_D_argent.Models.Journalize", "Journalize")
                         .WithMany("Journal_Accounts")
-                        .HasForeignKey("JournalizeJournalId");
+                        .HasForeignKey("JournalizeJournalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Journalize");
                 });
